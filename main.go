@@ -2,14 +2,14 @@ package main
 
 import (
 	"log"
-	"tuiminesweeper/internal"
+	"tuiminesweeper/game"
 )
 
 func main() {
 	size := 30
-	mineCount := 200
+	mineCount := 150
 
-	board, err := internal.NewBoard(size)
+	board, err := game.NewBoard(size)
 	if err != nil {
 		log.Fatalf("invalid config:", err)
 	}

@@ -1,14 +1,14 @@
-package internal
+package game
 
 import (
 	"fmt"
 	"math/rand"
-	"slices"
 )
 
 type Board struct {
-	Size  int
-	Cells [][]Cell
+	Size      int
+	Cells     [][]Cell
+	MineCount int
 }
 
 func NewBoard(size int) (*Board, error) {
@@ -31,12 +31,11 @@ func (b *Board) PlaceMines(mines int) error {
 	pos := rand.Perm(b.Size * b.Size)
 	pos = pos[0:mines]
 
-	for i := range b.Size * b.Size {
-		if slices.Contains(pos, i) {
-			x := i % b.Size
-			y := i / b.Size
-			b.Cells[y][x].Mine = true
-		}
+	for _, p := range pos {
+		y := p / b.Size
+		x := p % b.Size
+		b.Cells[y][x].Mine = true
+		b.MineCount += 1
 	}
 	return nil
 }
@@ -87,7 +86,7 @@ func (b *Board) CalcAdjacents() {
 					}
 				}
 			}
-			b.Cells[i][j].Adjacent = count
+			b.Cells[i][j].Around = count
 		}
 	}
 }
@@ -98,9 +97,12 @@ func (b *Board) PrintBoard() {
 			if b.Cells[i][j].Mine {
 				fmt.Print("X ")
 			} else {
-				fmt.Print(b.Cells[i][j].Adjacent, " ")
+				fmt.Print(b.Cells[i][j].Around, " ")
 			}
 		}
 		fmt.Println()
 	}
+	fmt.Println("Mine Count:", b.MineCount)
+	fmt.Println("Board Size:", b.Size*b.Size)
+
 }
