@@ -106,3 +106,54 @@ func (b *Board) PrintBoard() {
 	fmt.Println("Board Size:", b.Size*b.Size)
 
 }
+
+func (b *Board) Reveal(y, x int) {
+	if b.Cells[y][x].Mine {
+		//Gameover logic
+		return
+	}
+	b.Cells[y][x].Revealed = true
+	if b.Cells[y][x].Around == 0 {
+		if y != 0 {
+			if b.Cells[y-1][x].Around == 0 {
+				b.Reveal(y-1, x)
+			}
+			if x != 0 {
+				if b.Cells[y-1][x-1].Around == 0 {
+					b.Reveal(y-1, x-1)
+				}
+			}
+			if x != b.Size-1 {
+				if b.Cells[y-1][x+1].Around == 0 {
+					b.Reveal(y-1, x+1)
+				}
+			}
+		}
+		if x != 0 {
+			if b.Cells[y][x-1].Around == 0 {
+				b.Reveal(y, x-1)
+			}
+		}
+		if x != b.Size-1 {
+			if b.Cells[y][x+1].Around == 0 {
+				b.Reveal(y, x+1)
+			}
+		}
+		if y != b.Size-1 {
+			if b.Cells[y+1][x].Around == 0 {
+				b.Reveal(y-1, x)
+			}
+			if x != 0 {
+				if b.Cells[y+1][x-1].Around == 0 {
+					b.Reveal(y-1, x-1)
+				}
+			}
+			if x != b.Size-1 {
+				if b.Cells[y+1][x+1].Around == 0 {
+					b.Reveal(y-1, x+1)
+				}
+			}
+		}
+		return
+	}
+}
