@@ -1,4 +1,4 @@
-package tuiminesweeper
+package internal
 
 type Cell struct {
 	Mine     bool

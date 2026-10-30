@@ -1,4 +1,4 @@
-package tuiminesweeper
+package internal
 
 import (
 	"fmt"
@@ -89,5 +89,18 @@ func (b *Board) CalcAdjacents() {
 			}
 			b.Cells[i][j].Adjacent = count
 		}
+	}
+}
+
+func (b *Board) PrintBoard() {
+	for i := range b.Cells {
+		for j := range b.Cells[i] {
+			if b.Cells[i][j].Mine {
+				fmt.Print("X ")
+			} else {
+				fmt.Print(b.Cells[i][j].Adjacent, " ")
+			}
+		}
+		fmt.Println()
 	}
 }

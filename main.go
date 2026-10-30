@@ -1,14 +1,15 @@
-package tuiminesweeper
+package main
 
 import (
 	"log"
+	"tuiminesweeper/internal"
 )
 
 func main() {
 	size := 30
 	mineCount := 200
 
-	board, err := NewBoard(size)
+	board, err := internal.NewBoard(size)
 	if err != nil {
 		log.Fatalf("invalid config:", err)
 	}
@@ -17,4 +18,5 @@ func main() {
 		log.Fatalf("invalid config:", err)
 	}
 	board.CalcAdjacents()
+	board.PrintBoard()
 }
