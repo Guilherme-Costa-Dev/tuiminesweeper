@@ -167,7 +167,7 @@ func (m Model) View() tea.View {
 	}
 	centeredText(&out, status, statusColor, width)
 
-	centeredText(&out, "arrows/hjkl move  ·  space reveal  ·  f flag  ·  r restart  ·  q quit", tnComment, width)
+	centeredText(&out, "arrows/hjkl/wasd move  ·  space reveal  ·  f flag  ·  r restart  ·  q quit", tnComment, width)
 
 	out.WriteString("\x1b[0m")
 

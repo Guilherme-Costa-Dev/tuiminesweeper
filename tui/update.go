@@ -33,19 +33,19 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	switch s {
-	case "up", "k":
+	case "up", "k", "w":
 		if m.CursorY > 0 {
 			m.CursorY--
 		}
-	case "down", "j":
+	case "down", "j", "s":
 		if m.CursorY < m.Board.Size-1 {
 			m.CursorY++
 		}
-	case "left", "h":
+	case "left", "h", "a":
 		if m.CursorX > 0 {
 			m.CursorX--
 		}
-	case "right", "l":
+	case "right", "l", "d":
 		if m.CursorX < m.Board.Size-1 {
 			m.CursorX++
 		}
