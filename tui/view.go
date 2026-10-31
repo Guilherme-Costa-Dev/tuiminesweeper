@@ -11,6 +11,7 @@ import (
 )
 
 const (
+	tnWhite    = "#ffffff"
 	tnBg       = "#1a1b26"
 	tnBgDark   = "#1f2335"
 	tnBgHigh   = "#3b4261"
@@ -64,7 +65,7 @@ func glyph(c game.Cell, underCursor bool) (text, fg, bg string) {
 	case c.Revealed:
 		return "  ", tnFg, tnBgReveal
 	case c.Flagged:
-		return " F", tnMagenta, tnBgHigh
+		return " F", tnWhite, tnBgReveal
 	default:
 		return "  ", tnFg, tnBgHigh
 	}
