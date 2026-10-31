@@ -7,7 +7,7 @@ import (
 
 func main() {
 	size := 30
-	mineCount := 150
+	mineCount := 100
 
 	board, err := game.NewBoard(size)
 	if err != nil {
@@ -18,5 +18,6 @@ func main() {
 		log.Fatalf("invalid config:", err)
 	}
 	board.CalcAdjacents()
-	board.PrintBoard()
+	board.Reveal(15, 15)
+	board.PrintDebugBoard()
 }
