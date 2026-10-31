@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	tea "charm.land/bubbletea/v2"
-	"tuiminesweeper/game"
+	"github.com/Guilherme-Costa-Dev/tuiminesweeper/game"
 )
 
 const (

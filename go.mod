@@ -1,4 +1,4 @@
-module tuiminesweeper
+module github.com/Guilherme-Costa-Dev/tuiminesweeper
 
 go 1.27.3
 

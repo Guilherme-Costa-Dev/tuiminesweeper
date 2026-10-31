@@ -1,6 +1,6 @@
 package tui
 
-import "tuiminesweeper/game"
+import "github.com/Guilherme-Costa-Dev/tuiminesweeper/game"
 
 type Model struct {
 	Board    *game.Board
