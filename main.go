@@ -1,23 +1,26 @@
 package main
 
 import (
-	"log"
-	"tuiminesweeper/game"
+	"flag"
+	"fmt"
+	"os"
+
+	tea "charm.land/bubbletea/v2"
+	"tuiminesweeper/tui"
 )
 
 func main() {
-	size := 30
-	mineCount := 100
+	var size int
+	flag.IntVar(&size, "width", 30, "Defines the width of the board")
+	flag.IntVar(&size, "w", 30, "Defines the width of the board")
+	var mineCount int
+	flag.IntVar(&mineCount, "mines", 150, "Defines the amount of mines in the board")
+	flag.IntVar(&mineCount, "m", 150, "Defines the ammount of mines in the board")
+	flag.Parse()
 
-	board, err := game.NewBoard(size)
-	if err != nil {
-		log.Fatalf("invalid config:", err)
+	p := tea.NewProgram(tui.New(size, mineCount))
+	if _, err := p.Run(); err != nil {
+		fmt.Println("error:", err)
+		os.Exit(1)
 	}
-	err = board.PlaceMines(mineCount)
-	if err != nil {
-		log.Fatalf("invalid config:", err)
-	}
-	board.CalcAdjacents()
-	board.Reveal(15, 15)
-	board.PrintDebugBoard()
 }
