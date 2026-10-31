@@ -19,5 +19,5 @@ func main() {
 	}
 	board.CalcAdjacents()
 	board.Reveal(15, 15)
-	board.PrintBoard()
+	board.PrintDebugBoard()
 }
