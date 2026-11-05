@@ -178,3 +178,8 @@ func (b *Board) RevealAll() {
 		}
 	}
 }
+
+func (b *Board) CalcRevealStats() float64 {
+	var percent float64 = float64(b.RevealCount) / (float64(b.Size*b.Size - b.MineCount))
+	return percent * 100
+}
