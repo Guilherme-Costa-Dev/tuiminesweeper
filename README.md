@@ -1,7 +1,6 @@
 # TUI minesweeper game made in GO
 
-<img width="974" height="908" alt="image" src="https://github.com/user-attachments/assets/434ba094-07eb-4d4b-a5fe-6d387bbf357c" />
-
+<img width="806" height="811" alt="image" src="https://github.com/user-attachments/assets/58fef332-2571-4165-ac4c-0ad1c60bb21b" />
 
 ## Install
 With go installed:
