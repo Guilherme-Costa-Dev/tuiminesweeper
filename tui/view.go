@@ -159,12 +159,14 @@ func (m Model) View() tea.View {
 	out.WriteString("\n")
 	out.WriteString(bgHex(tnBg))
 
-	status, statusColor := fmt.Sprintf("%d mines  %dx%d", m.Board.MineCount, m.Board.Size, m.Board.Size), tnComment
+	status, statusColor := fmt.Sprintf("%.2f%%  ·  %d mines  ·  %dx%d", m.Board.CalcRevealStats(), m.Board.MineCount, m.Board.Size, m.Board.Size), tnComment
 	switch {
 	case m.GameOver:
-		status, statusColor = "Game Over   r restart   q quit", tnRed
+		status, statusColor = fmt.Sprintf("%.2f%%  ·  r restart   q quit", m.Board.CalcRevealStats()), tnRed
 	case m.Won:
-		status, statusColor = "You Won!   r restart   q quit", tnGreen
+		status, statusColor = fmt.Sprintf("%.2f%%  ·  r restart   q quit", m.Board.CalcRevealStats()), tnGreen
+	case m.Board.CalcRevealStats() == 100.00:
+		centeredText(&out, "Got something wrong there", tnComment, width)
 	}
 	centeredText(&out, status, statusColor, width)
 

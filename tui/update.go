@@ -50,7 +50,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.CursorX++
 		}
 	case "space", " ":
-		if err := m.Board.Reveal(m.CursorX, m.CursorY); err == nil {
+		err := m.Board.Reveal(m.CursorX, m.CursorY)
+		if err == nil {
 			if m.Board.Lost {
 				m.GameOver = true
 				m.Board.RevealAll()
@@ -60,6 +61,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case "f":
 		_ = m.Board.Flag(m.CursorX, m.CursorY)
+		if m.Board.Won() {
+			m.Won = true
+		}
 	case "r":
 		return m.reset(), nil
 	}

@@ -10,6 +10,7 @@ type Board struct {
 	Cells       [][]Cell
 	MineCount   int
 	RevealCount int
+	FlagCount   int
 	Lost        bool
 }
 
@@ -158,14 +159,16 @@ func (b *Board) Flag(x, y int) error {
 	}
 	if b.Cells[y][x].Flagged {
 		b.Cells[y][x].Flagged = false
+		b.FlagCount--
 		return nil
 	}
 	b.Cells[y][x].Flagged = true
+	b.FlagCount++
 	return nil
 }
 
 func (b *Board) Won() bool {
-	if b.RevealCount == b.Size*b.Size-b.MineCount {
+	if b.FlagCount == b.MineCount && b.RevealCount == b.Size*b.Size-b.MineCount {
 		return true
 	}
 	return false
@@ -180,6 +183,6 @@ func (b *Board) RevealAll() {
 }
 
 func (b *Board) CalcRevealStats() float64 {
-	var percent float64 = float64(b.RevealCount) / (float64(b.Size*b.Size - b.MineCount))
+	var percent float64 = float64(b.RevealCount+b.FlagCount) / float64(b.Size*b.Size)
 	return percent * 100
 }
